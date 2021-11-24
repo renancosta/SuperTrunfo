@@ -1,4 +1,4 @@
-package classeDominio;
+package domain;
 
 import java.sql.Date;
 

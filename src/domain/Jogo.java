@@ -1,4 +1,4 @@
-package classeDominio;
+package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,20 +10,21 @@ public class Jogo {
 	Jogador turnoJogador = new Jogador();
 	private List<Carta> maoCartas1 = new ArrayList<Carta>();
 	private List<Carta> maoCartas2 = new ArrayList<Carta>();
-
+	private List<Carta> cartasEmpatadas = new ArrayList<Carta>();
+	
 	public void embaralharCartas() {
-		
+		Collections.shuffle(baralho);
 	}
 
 	public void distribuirCartas(int opcao) {
 		switch (opcao) {
 		case 1:
 			maoCartas1 = baralho.subList(0, 15);
-			maoCartas2 = baralho.subList(16, 31);
+			maoCartas2 = baralho.subList(15, 31);
 			break;
 		case 2:
 			maoCartas2 = baralho.subList(0, 15);
-			maoCartas1 = baralho.subList(16, 31);
+			maoCartas1 = baralho.subList(15, 31);
 			break;
 		case 3:
 			for (int i = 0; i < baralho.size(); i++) {
@@ -88,9 +89,50 @@ public class Jogo {
 			for(Carta c:maoCartas2) {
 				System.out.println(c.getNome());
 			}
+		} else if (mao==3) {
+			System.out.println("Cartas Empatadas: ");
+			for(Carta c:cartasEmpatadas) {
+				System.out.println(c.getNome());
+			}
 		} else {
 			System.out.println("Mão inexistente!");
 		}
+	}
+	
+	public void jogar() {
+		if(maoCartas1.get(0).getAtributo4()>maoCartas2.get(0).getAtributo4()) {
+			System.out.println("Jogador 1 venceu");
+			Carta cartaGanhou = maoCartas1.get(0);
+			Carta cartaPerdeu = maoCartas2.get(0);
+			maoCartas1.remove(0);
+			maoCartas1.add(cartaGanhou);
+			maoCartas1.add(cartaPerdeu);
+			maoCartas2.remove(0);
+			if(!cartasEmpatadas.isEmpty()) {
+				maoCartas1.addAll(cartasEmpatadas);
+				cartasEmpatadas.removeAll(cartasEmpatadas);
+			}
+		} else if (maoCartas1.get(0).getAtributo4()<maoCartas2.get(0).getAtributo4()) {
+			System.out.println("Jogador 2 venceu");
+			Carta cartaGanhou = maoCartas2.get(0);
+			Carta cartaPerdeu = maoCartas1.get(0);
+			maoCartas2.remove(0);
+			maoCartas2.add(cartaGanhou);
+			maoCartas2.add(cartaPerdeu);
+			maoCartas1.remove(0);
+			if(!cartasEmpatadas.isEmpty()) {
+				maoCartas2.addAll(cartasEmpatadas);
+				cartasEmpatadas.removeAll(cartasEmpatadas);
+			}
+		} else {
+			System.out.println("Empatado");
+			cartasEmpatadas.add(maoCartas1.get(0));
+			cartasEmpatadas.add(maoCartas2.get(0));
+			maoCartas1.remove(0);
+			maoCartas2.remove(0);
+		}
+		System.out.println(maoCartas1.size());
+		System.out.println(maoCartas2.size());
 	}
 	
 }
