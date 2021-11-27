@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class Jogo {
 	private List<Carta> baralho = new ArrayList<Carta>();
 	private List<Jogador> sala = new ArrayList<Jogador>();
@@ -99,37 +101,45 @@ public class Jogo {
 		}
 	}
 	
-	public void jogar() {
-		if(maoCartas1.get(0).getAtributo4()>maoCartas2.get(0).getAtributo4()) {
-			System.out.println("Jogador 1 venceu");
-			Carta cartaGanhou = maoCartas1.get(0);
-			Carta cartaPerdeu = maoCartas2.get(0);
-			maoCartas1.remove(0);
-			maoCartas1.add(cartaGanhou);
-			maoCartas1.add(cartaPerdeu);
-			maoCartas2.remove(0);
-			if(!cartasEmpatadas.isEmpty()) {
-				maoCartas1.addAll(cartasEmpatadas);
-				cartasEmpatadas.removeAll(cartasEmpatadas);
-			}
-		} else if (maoCartas1.get(0).getAtributo4()<maoCartas2.get(0).getAtributo4()) {
-			System.out.println("Jogador 2 venceu");
-			Carta cartaGanhou = maoCartas2.get(0);
-			Carta cartaPerdeu = maoCartas1.get(0);
-			maoCartas2.remove(0);
-			maoCartas2.add(cartaGanhou);
-			maoCartas2.add(cartaPerdeu);
-			maoCartas1.remove(0);
-			if(!cartasEmpatadas.isEmpty()) {
-				maoCartas2.addAll(cartasEmpatadas);
-				cartasEmpatadas.removeAll(cartasEmpatadas);
-			}
+	public void jogar(int atributoMao1, int atributoMao2) {
+		if(maoCartas1.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Você perdeu!");
+			JOptionPane.showConfirmDialog(null, "Deseja jogar novamente?");
+		} else if(maoCartas2.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Parabéns, você ganhou!");
+			JOptionPane.showConfirmDialog(null, "Deseja jogar novamente?");
 		} else {
-			System.out.println("Empatado");
-			cartasEmpatadas.add(maoCartas1.get(0));
-			cartasEmpatadas.add(maoCartas2.get(0));
-			maoCartas1.remove(0);
-			maoCartas2.remove(0);
+			if(atributoMao1>atributoMao2) {
+				System.out.println("Jogador 1 venceu");
+				Carta cartaGanhou = maoCartas1.get(0);
+				Carta cartaPerdeu = maoCartas2.get(0);
+				maoCartas1.remove(0);
+				maoCartas1.add(cartaGanhou);
+				maoCartas1.add(cartaPerdeu);
+				maoCartas2.remove(0);
+				if(!cartasEmpatadas.isEmpty()) {
+					maoCartas1.addAll(cartasEmpatadas);
+					cartasEmpatadas.removeAll(cartasEmpatadas);
+				}
+			} else if (atributoMao1<atributoMao2) {
+				System.out.println("Jogador 2 venceu");
+				Carta cartaGanhou = maoCartas2.get(0);
+				Carta cartaPerdeu = maoCartas1.get(0);
+				maoCartas2.remove(0);
+				maoCartas2.add(cartaGanhou);
+				maoCartas2.add(cartaPerdeu);
+				maoCartas1.remove(0);
+				if(!cartasEmpatadas.isEmpty()) {
+					maoCartas2.addAll(cartasEmpatadas);
+					cartasEmpatadas.removeAll(cartasEmpatadas);
+				}
+			} else {
+				System.out.println("Empatado");
+				cartasEmpatadas.add(maoCartas1.get(0));
+				cartasEmpatadas.add(maoCartas2.get(0));
+				maoCartas1.remove(0);
+				maoCartas2.remove(0);
+			}
 		}
 		System.out.println(maoCartas1.size());
 		System.out.println(maoCartas2.size());

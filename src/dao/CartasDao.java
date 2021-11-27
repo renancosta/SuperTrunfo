@@ -25,8 +25,8 @@ public class CartasDao {
 
 		while (rs.next()) {
 			cartas.add(new Carta(rs.getInt("idcarta"), baralho, rs.getString("nome"), rs.getString("tipo"),
-					rs.getString("imagem"), rs.getInt("atributo1"), rs.getInt("atributo2"), rs.getInt("atributo3"),
-					rs.getInt("atributo4"), rs.getInt("atributo5")));
+					rs.getString("imagem"), rs.getInt("atributo5"), rs.getInt("atributo2"), rs.getInt("atributo1"),
+					rs.getInt("atributo4"), rs.getInt("atributo3")));
 		}
 
 		conexao.close();
