@@ -19,6 +19,7 @@ import dao.CartasDao;
 import domain.Carta;
 import domain.Jogo;
 import javax.swing.JRadioButton;
+import java.awt.Color;
 
 public class TelaPrincipal extends JFrame {
 	List<Carta> cartas = CartasDao.carregaCartas();
@@ -67,46 +68,52 @@ public class TelaPrincipal extends JFrame {
 		
 		lCartaUsuario.setBounds(51, 28, 138, 209);
 		lCartaComputador.setBounds(689, 28, 138, 209);
+		bAltura.setBounds(51, 271, 85, 21);
+		bInteligencia.setBounds(51, 310, 85, 21);
+		bForca.setBounds(51, 354, 85, 21);
+		bVelocidade.setBounds(51, 397, 85, 21);
+		bHabilidade.setBounds(51, 439, 85, 21);
+		
 		bAltura.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				exibeCartaComputador();
 				atributoMao1 = jogo.getMaoCartas1().get(0).getAtributo1();
 				atributoMao2 = jogo.getMaoCartas2().get(0).getAtributo1();
+				bAltura.setBackground(Color.ORANGE);
 			}
 		});
-		bAltura.setBounds(51, 271, 85, 21);
 		bInteligencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				exibeCartaComputador();
 				atributoMao1 = jogo.getMaoCartas1().get(0).getAtributo2();
 				atributoMao2 = jogo.getMaoCartas2().get(0).getAtributo2();
+				bInteligencia.setBackground(Color.ORANGE);
 			}
 		});
-		bInteligencia.setBounds(51, 310, 85, 21);
 		bForca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				exibeCartaComputador();
 				atributoMao1 = jogo.getMaoCartas1().get(0).getAtributo3();
 				atributoMao2 = jogo.getMaoCartas2().get(0).getAtributo3();
+				bForca.setBackground(Color.ORANGE);
 			}
 		});
-		bForca.setBounds(51, 354, 85, 21);
 		bVelocidade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				exibeCartaComputador();
 				atributoMao1 = jogo.getMaoCartas1().get(0).getAtributo4();
 				atributoMao2 = jogo.getMaoCartas2().get(0).getAtributo4();
+				bVelocidade.setBackground(Color.ORANGE);
 			}
 		});
-		bVelocidade.setBounds(51, 397, 85, 21);
 		bHabilidade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				exibeCartaComputador();
 				atributoMao1 = jogo.getMaoCartas1().get(0).getAtributo5();
 				atributoMao2 = jogo.getMaoCartas2().get(0).getAtributo5();
+				bHabilidade.setBackground(Color.ORANGE);
 			}
 		});
-		bHabilidade.setBounds(51, 439, 85, 21);
 		
 		contentPane.add(lCartaUsuario);
 		contentPane.add(lCartaComputador);
@@ -144,6 +151,11 @@ public class TelaPrincipal extends JFrame {
 		bForca.setText(jogo.getMaoCartas1().get(0).getAtributo3()+"");
 		bVelocidade.setText(jogo.getMaoCartas1().get(0).getAtributo4()+"");
 		bHabilidade.setText(jogo.getMaoCartas1().get(0).getAtributo5()+"");
+		bAltura.setBackground(Color.WHITE);
+		bInteligencia.setBackground(Color.WHITE);
+		bForca.setBackground(Color.WHITE);
+		bVelocidade.setBackground(Color.WHITE);
+		bHabilidade.setBackground(Color.WHITE);
 	}
 	
 	private void exibeCartaComputador(){
