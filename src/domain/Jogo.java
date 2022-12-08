@@ -110,7 +110,7 @@ public class Jogo {
 			JOptionPane.showConfirmDialog(null, "Deseja jogar novamente?");
 		} else {
 			if(atributoMao1>atributoMao2) {
-				System.out.println("Jogador 1 venceu");
+				JOptionPane.showMessageDialog(null, "Você ganhou a rodada");
 				Carta cartaGanhou = maoCartas1.get(0);
 				Carta cartaPerdeu = maoCartas2.get(0);
 				maoCartas1.remove(0);
@@ -122,7 +122,7 @@ public class Jogo {
 					cartasEmpatadas.removeAll(cartasEmpatadas);
 				}
 			} else if (atributoMao1<atributoMao2) {
-				System.out.println("Jogador 2 venceu");
+				JOptionPane.showMessageDialog(null, "Você perdeu a rodada");
 				Carta cartaGanhou = maoCartas2.get(0);
 				Carta cartaPerdeu = maoCartas1.get(0);
 				maoCartas2.remove(0);
@@ -134,7 +134,7 @@ public class Jogo {
 					cartasEmpatadas.removeAll(cartasEmpatadas);
 				}
 			} else {
-				System.out.println("Empatado");
+				JOptionPane.showMessageDialog(null, "Rodada empatada");
 				cartasEmpatadas.add(maoCartas1.get(0));
 				cartasEmpatadas.add(maoCartas2.get(0));
 				maoCartas1.remove(0);
